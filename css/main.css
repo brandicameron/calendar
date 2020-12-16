@@ -1,0 +1,103 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+:root {
+	--grey: #dadce0;
+	--light-grey: #efefef;
+	--text-grey: #767575;
+	--accent-color: #2311fc;
+}
+
+body {
+	position: relative;
+	min-height: 100vh;
+	font-family: 'Manrope', sans-serif;
+	font-weight: 200;
+	color: var(--text-grey);
+}
+
+h1 {
+	margin: 0;
+	display: grid;
+	place-items: center;
+	font-size: 7.3rem;
+	line-height: 79%;
+	font-weight: 200;
+	background: var(--light-grey);
+	color: var(--accent-color);
+}
+
+.display-month-year {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 2rem;
+	height: 60px;
+	margin-top: 50px;
+}
+
+.dayofweek-text-container {
+	text-align: center;
+	padding-bottom: 5px;
+	font-size: .9rem;
+}
+
+.day-cells-container,
+.dayofweek-text-container {
+	display: grid;
+	grid-template-columns: repeat(7, 1fr);
+	width: 70vw;
+	max-width: 750px;
+	margin: 0 auto;
+}
+
+.cells:nth-child(7n+1),
+.cells:nth-child(7n+7) {
+	color: var(--accent-color);
+}
+
+.cells {
+	border: 1px solid var(--grey);
+	height: 100px;
+	text-align: right;
+	padding: 5px;
+	margin-right: -1px;
+	margin-bottom: -1px;
+	cursor: pointer;
+}
+
+.selected {
+	background: var(--accent-color);
+	border: 1px dashed var(--accent-color);
+	color: #fff;
+}
+
+.cells:nth-child(7n+1).selected,
+.cells:nth-child(7n+7).selected {
+	color: #fff;
+}
+
+footer {
+	height: 100px;
+}
+
+@media screen and (max-width: 850px) {
+
+	h1 {
+		font-size: 6rem;
+	}
+
+	.day-cells-container,
+	.dayofweek-text-container {
+		width: 85vw;
+	}
+
+	.cells {
+		height: 12vw;
+		font-size: .9rem;
+		padding: 3px;
+	}
+}
