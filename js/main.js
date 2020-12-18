@@ -1,13 +1,25 @@
+var firebaseConfig = {
+	apiKey: "AIzaSyCUCzjEAhIXzd2a25u0Nt8nIVDi8qhUm3k",
+	authDomain: "calendar-e9e4a.firebaseapp.com",
+	databaseURL: "https://calendar-e9e4a.firebaseio.com",
+	projectId: "calendar-e9e4a",
+	storageBucket: "calendar-e9e4a.appspot.com",
+	messagingSenderId: "473369134213",
+	appId: "1:473369134213:web:f6e1c7c07dd5f1671bd5ec"
+};
+
+firebase.initializeApp(firebaseConfig);
+const auth = firebase.auth();
+const db = firebase.firestore();
 const yearContainer = document.querySelector('.year-container');
-const year = 2020;
 let days = ['Sun', 'Mon', 'Tues', 'Wed', 'Thur', 'Fri', 'Sat'];
 
 
+// CREATE CALENDAR
 
-function displayYear() {
+function displayYear(year) {
 	document.querySelector('.display-year').textContent = year;
 }
-
 
 
 function create12Months() {
@@ -16,7 +28,6 @@ function create12Months() {
 		const newMonth = template.content.cloneNode(true);
 		yearContainer.appendChild(newMonth);
 	}
-
 	//important for getting first day of month & total days in a month
 	let dayContainers = document.querySelectorAll('.day-cells-container');
 	let i = 0;
@@ -26,16 +37,14 @@ function create12Months() {
 }
 
 
-
-function displayMonthName() {
-	const monthName = ['January','February','March','April','May','June','July',
-										 'August','Sepetember','October','November','December'];
+function displayMonthName(year) {
+	const monthName = ['January', 'February', 'March', 'April', 'May', 'June', 'July',
+										 'August', 'Sepetember', 'October', 'November', 'December'];
 	const monthsOfYear = document.querySelectorAll('.display-month-year');
 	for (let i = 0; i < monthsOfYear.length; i++) {
 		monthsOfYear[i].textContent = `${monthName[i]} ${year}`;
 	}
 }
-
 
 
 function createDaysofWeek() {
@@ -51,14 +60,12 @@ function createDaysofWeek() {
 };
 
 
-
+// Returns index of first day of month, so that later that number of empty cells can be added to the calendar month ensuring the first day of the month starts on the right day
 function getFirstDay(year, month) {
 	let date = new Date(year, month, 1);
 	let day = days[date.getDay()];
 	return days.indexOf(day);
-	//returns index of first day of month, so that later that number of empty cells can be created so that the first day of the month starts on the right day
 }
-
 
 
 function getNumOfDays(year, month) {
@@ -67,8 +74,7 @@ function getNumOfDays(year, month) {
 }
 
 
-
-function createDays() {
+function createDays(year) {
 	const dayContainers = document.querySelectorAll('.day-cells-container');
 
 	dayContainers.forEach((container) => {
@@ -93,38 +99,85 @@ function createDays() {
 	})
 }
 
-
-
-(function createYear() {
-	displayYear();
-	create12Months();
-	displayMonthName();
-	createDaysofWeek();
-	createDays();
-})();
-
-
-
-const userSelection = (() => {
+function selectDays() {
 	let cells = document.querySelectorAll('.cells');
 	cells.forEach((select) => {
-		select.addEventListener('click', event => {
-			event.target.classList.toggle('selected');
+		select.addEventListener('click', e => {
+			let dayCellId = e.target.id;
+			e.target.classList.toggle('selected');
+
+			// add selected days to Firestore database
+			if (e.target.classList.contains('selected')) {
+				auth.onAuthStateChanged((user) => {
+					if (user) {
+						db.collection(user.uid).doc(dayCellId).set({
+								id: dayCellId,
+							})
+							.then(function () {
+							})
+							.catch(function (error) {
+								console.error("Error writing document: ", error);
+							})
+					}
+				})
+			} else {
+				auth.onAuthStateChanged((user) => {
+					if (user) {
+						db.collection(user.uid).doc(dayCellId).delete();
+					}
+				})
+			}
 		})
 	})
-})();
+}
 
 
-yearContainer.addEventListener('click', (e) => {
-	if (e.target.classList.contains('selected')) {
-		console.log(e.target.id);
+// Realtime Listener
+function changeListener() {
+	auth.onAuthStateChanged(user => {
+		if (user) {
+			db.collection(user.uid).onSnapshot((snapshot) => {
+				let changes = snapshot.docChanges();
+				changes.forEach(change => {
+					if (change.type == "added") {
+						let currentDay = parseInt(change.doc.id);
+						//console.log(currentDay);
+						if (!document.getElementById(currentDay)) {
+							return;
+						} else {
+							document.getElementById(currentDay).classList.add('selected');
+						}
+
+					} else if (change.type == 'removed') {
+						//do nothing i guess lol
+					}
+				})
+			})
+		}
+	})
+}
+
+
+// Jump to current month if current year is displayed
+function createJumpLink() {
+	const getCurrentMonth = new Date().getMonth();
+	const monthDivs = document.querySelectorAll('.display-month-year');
+	let currentMonth = monthDivs[getCurrentMonth];
+	currentMonth.id = 'jumpLink';
+}
+
+function jumpToCurrentMonth() {
+	let currentYear = new Date().getFullYear();
+	let pageTitle = document.querySelector('.display-year').textContent;
+
+	if (currentYear === parseInt(pageTitle)) {
+		let currentMonth = document.getElementById('jumpLink');
+		let currentMonthYPos = currentMonth.getBoundingClientRect().y;
+		window.scrollTo(0, currentMonthYPos);
 	}
-})
+}
 
-
-// TO DO
-
-
-// Take out hard coded year and print a range of years instead - better yet, make input page where you can select dates you want to display!
-
-// Add selected dates to Firebase and create login of course
+// Log if user is logged in
+//auth.onAuthStateChanged(user => {
+//	console.log(user.uid);
+//})

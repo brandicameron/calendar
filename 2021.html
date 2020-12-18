@@ -1,9 +1,8 @@
 <!doctype html>
 <html class="no-js" lang="en">
-
 <head>
 	<meta charset="utf-8">
-	<title>Calendar</title>
+	<title>2021 Calendar</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="author" content="Brandi Cameron | hello@brandicameron.com">
@@ -19,21 +18,37 @@
 
 <body>
 
-	<section class="login-screen">
-		<h1 class="login-title">Login</h1>
-		<form class="login-form">
-			<input type="email" name="email" placeholder="Email" id="login-email">
-			<input type="password" name="password" placeholder="Password" id="login-password" autocomplete="current-password">
-			<button id="login-btn" class="login-btns">Login</button>
-			<button id="logout-btn" class="login-btns">Logout</button>
-		</form>
-	</section>
-
+	<div class="year-container">
+		<h1 class="display-year"></h1>
+		<template id="template">
+		<div class="month">
+			<div class="display-month-year"></div>
+			<div class="dayofweek-text-container"></div>
+			<div class="day-cells-container">
+			</div>
+		</div>
+	</template>
+	</div>
+	<footer></footer>
+	
 	<script src="https://www.gstatic.com/firebasejs/8.1.2/firebase-app.js"></script>
 	<script src="https://www.gstatic.com/firebasejs/8.1.2/firebase-auth.js"></script>
 	<script src="https://www.gstatic.com/firebasejs/8.1.2/firebase-firestore.js"></script>
-	<script src="js/login.js"></script>
-
+	<script src="js/main.js"></script>
+	
+	<script>
+		(function createYear() {
+			displayYear(2021);
+			create12Months();
+			displayMonthName(2021);
+			createDaysofWeek();
+			createDays(2021);
+			selectDays();
+			changeListener();
+			createJumpLink();
+			jumpToCurrentMonth();
+		})();
+	</script>
 </body>
 
 </html>

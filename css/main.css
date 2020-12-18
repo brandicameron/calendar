@@ -19,6 +19,80 @@ body {
 	color: var(--text-grey);
 }
 
+/*  LOGIN SCREEN  */
+
+.login-screen {
+	display: flex;
+	flex-direction: column;
+	flex-direction: center;
+	align-items: center;
+	background: var(--accent-color);
+	height: 100vh;
+	width: 100vw;
+}
+
+.login-title {
+	background: none;
+	color: #fff;
+	font-size: 5.5rem;
+	height: 150px;
+}
+
+.login-form {
+	display: flex;
+	flex-direction: column;
+	flex-direction: center;
+	align-items: center;
+}
+
+.login-form input {
+	height: 60px;
+	width: 100%;
+	max-width: 300px;
+	border-radius: 20px;
+	border: 1px solid var(--divider-color);
+	margin: 7px 0;
+	color: var(--text-grey);
+	font-size: 1.2rem;
+	padding: 0 15px;
+}
+
+.login-form input::placeholder {
+	color: var(--text-grey);
+	font-size: 1rem;
+}
+
+.login-form input:focus,
+#login-btn:focus {
+	outline: none;
+	border: 3px dotted #fa904d;
+	box-shadow: 5px 5px 10px -5px rgba(0 0 0 / 30%);
+}
+
+.login-btns {
+	width: 100%;
+	max-width: 300px;
+	height: 60px;
+	border-radius: 25px;
+	border: none;
+	margin: 15px 7px;
+	background: white;
+	color: var(--accent-color);
+	font-size: 1.7rem;
+	font-weight: 700;
+	box-shadow: 5px 5px 10px -5px rgba(0 0 0 / 30%);
+	cursor: pointer;
+	transition: tranform .3s ease;
+}
+
+#login-btn:hover {
+	transform: scale(.99);
+}
+
+
+/*  CALENDAR  */
+
+
 h1 {
 	margin: 0;
 	display: grid;
