@@ -154,9 +154,55 @@ h1 {
 	color: #fff;
 }
 
-footer {
-	height: 100px;
+.year-container {
+	margin-bottom: 175px;
 }
+
+footer {
+	position: fixed;
+	bottom: 0;
+	width: 100vw;
+	height: 7vh;
+	background: var(--accent-color);
+	box-shadow: 0 0 20px -5px rgb(0 0 0 / 40%);
+}
+
+.year-links {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin: 0 auto;
+	height: 100%;
+	max-width: 750px;
+}
+
+.year-btn {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: #fff;
+	text-decoration: none;
+	height: 100%;
+	width: 100%;
+	padding: 0 8%;
+	cursor: pointer;
+	background: var(--accent-color);
+	transition: filter .3s ease;
+}
+
+.year-btn:nth-child(odd) {
+	border-left: 3px solid white;
+	border-right: 3px solid white;
+}
+
+.year-btn:last-child {
+	border-right: 3px solid white;
+}
+
+.year-btn:hover {
+	filter: brightness(2.3);
+}
+
 
 @media screen and (max-width: 850px) {
 
@@ -174,4 +220,8 @@ footer {
 		font-size: .9rem;
 		padding: 3px;
 	}
+	
+	footer {
+	height: 8vh;
+}
 }
