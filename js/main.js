@@ -177,7 +177,7 @@ function jumpToCurrentMonth() {
 	}
 }
 
-// Log if user is logged in
+ //Log if user is logged in
 //auth.onAuthStateChanged(user => {
 //	console.log(user.uid);
 //})
