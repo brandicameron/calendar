@@ -24,7 +24,6 @@ body {
 .login-screen {
 	display: flex;
 	flex-direction: column;
-	flex-direction: center;
 	align-items: center;
 	background: var(--accent-color);
 	height: 100vh;
@@ -41,7 +40,6 @@ body {
 .login-form {
 	display: flex;
 	flex-direction: column;
-	flex-direction: center;
 	align-items: center;
 }
 
