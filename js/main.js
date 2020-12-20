@@ -140,8 +140,7 @@ function changeListener() {
 				let changes = snapshot.docChanges();
 				changes.forEach(change => {
 					if (change.type == "added") {
-						let currentDay = parseInt(change.doc.id);
-						//console.log(currentDay);
+						let currentDay = parseInt(change.doc.data().id);
 						if (!document.getElementById(currentDay)) {
 							return;
 						} else {
@@ -176,6 +175,18 @@ function jumpToCurrentMonth() {
 		window.scrollTo(0, currentMonthYPos);
 	}
 }
+
+function createYear(year) {
+			displayYear(year);
+			create12Months();
+			displayMonthName(year);
+			createDaysofWeek();
+			createDays(year);
+			selectDays();
+			changeListener();
+			createJumpLink();
+			jumpToCurrentMonth();
+		}
 
  //Log if user is logged in
 //auth.onAuthStateChanged(user => {
