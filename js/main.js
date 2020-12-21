@@ -146,7 +146,6 @@ function changeListener() {
 						} else {
 							document.getElementById(currentDay).classList.add('selected');
 						}
-
 					} else if (change.type == 'removed') {
 						//do nothing i guess lol
 					}
