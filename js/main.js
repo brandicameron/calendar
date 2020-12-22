@@ -79,14 +79,13 @@ function createDays(year) {
 
 	dayContainers.forEach((container) => {
 		let monthIndex = container.getAttribute('data-month-index');
-		let numOfDays = getNumOfDays(year, parseInt(monthIndex));
-		let firstDay = getFirstDay(year, parseInt(monthIndex));
+		let numOfDays = getNumOfDays(year, monthIndex);
+		let firstDay = getFirstDay(year, monthIndex);
 
 		for (let i = 1; i <= firstDay; i++) {
 			let emptycell = document.createElement('div');
 			emptycell.className = 'cells';
 			container.appendChild(emptycell);
-			emptycell.textContent = '';
 		}
 
 		for (let day = 1; day <= numOfDays; day++) {
@@ -94,7 +93,7 @@ function createDays(year) {
 			daycell.className = 'cells';
 			container.appendChild(daycell);
 			daycell.textContent = `${day}`;
-			daycell.id = `${year}${daycell.textContent}${parseInt(monthIndex)}`;
+			daycell.id = `${year}${daycell.textContent}${monthIndex}`;
 		}
 	})
 }
@@ -186,8 +185,3 @@ function createYear(year) {
 			createJumpLink();
 			jumpToCurrentMonth();
 		}
-
- //Log if user is logged in
-//auth.onAuthStateChanged(user => {
-//	console.log(user.uid);
-//})
