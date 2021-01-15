@@ -174,18 +174,6 @@ function jumpToCurrentMonth() {
 	}
 }
 
-function createYear(year) {
-			displayYear(year);
-			create12Months();
-			displayMonthName(year);
-			createDaysofWeek();
-			createDays(year);
-			selectDays();
-			changeListener();
-			createJumpLink();
-			jumpToCurrentMonth();
-			markCurrentDay();
-		}
 
 function markCurrentDay() {
 	let thisDay = new Date().getDate();
@@ -200,3 +188,17 @@ function markCurrentDay() {
 		}
 	});
 }
+
+function createYear(year) {
+			displayYear(year);
+			create12Months();
+			displayMonthName(year);
+			createDaysofWeek();
+			createDays(year);
+			selectDays();
+			changeListener();
+			createJumpLink();
+			jumpToCurrentMonth();
+			markCurrentDay();
+		}
+
