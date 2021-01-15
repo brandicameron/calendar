@@ -157,10 +157,16 @@ function changeListener() {
 
 // Jump to current month if current year is displayed
 function createJumpLink() {
+	let currentYear = new Date().getFullYear();
+	let pageTitle = document.querySelector('.display-year').textContent;
 	const getCurrentMonth = new Date().getMonth();
 	const monthDivs = document.querySelectorAll('.display-month-year');
 	let currentMonth = monthDivs[getCurrentMonth];
-	currentMonth.id = 'jumpLink';
+	
+	if (currentYear === parseInt(pageTitle)) {
+		currentMonth.id = 'jumpLink';
+	}
+	
 }
 
 function jumpToCurrentMonth() {
