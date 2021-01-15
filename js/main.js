@@ -184,4 +184,19 @@ function createYear(year) {
 			changeListener();
 			createJumpLink();
 			jumpToCurrentMonth();
+			markCurrentDay();
 		}
+
+function markCurrentDay() {
+	let thisDay = new Date().getDate();
+	let currentMonth = document.getElementById('jumpLink');
+	let dayOfThisMonth = currentMonth.nextElementSibling.nextElementSibling.children;
+	let daysArray = Array.from(dayOfThisMonth);
+	
+	let markDay = daysArray.filter((day) => {
+		if (parseInt(day.innerHTML) === new Date().getDate()) {
+			day.style.border = "2px dotted #2311fc";
+			day.style.zIndex = "1000";
+		}
+	});
+}
