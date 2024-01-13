@@ -1,0 +1,56 @@
+<!doctype html>
+<html class="no-js" lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<title>2025 Calendar</title>
+	<meta name="description" content="Simple calendar for tracking cycles.">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="author" content="Brandi Cameron | hello@brandicameron.com">
+	<link rel="stylesheet" href="css/normalize.css">
+	<link rel="stylesheet" href="css/main.css">
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;400;600&display=swap" rel="stylesheet">
+	<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+	<link rel="manifest" href="site.webmanifest">
+	<meta name="msapplication-TileColor" content="#da532c">
+	<meta name="theme-color" content="#ffffff">
+	<meta property="og:title" content="Calendar!" />
+	<meta property="og:image" content="https://bc-portfolio.s3.amazonaws.com/share.jpg" />
+</head>
+
+<body>
+
+	<div class="year-container">
+		<h1 class="display-year"></h1>
+		<template id="template">
+			<div class="month">
+				<div class="display-month-year"></div>
+				<div class="dayofweek-text-container"></div>
+				<div class="day-cells-container">
+				</div>
+			</div>
+		</template>
+	</div>
+	<footer>
+		<div class="year-links">
+			<a href="2022.html" class="year-btn">2022</a>
+			<a href="2023.html" class="year-btn">2023</a>
+			<a href="2024.html" class="year-btn">2024</a>
+			<a href="2025.html" class="year-btn">2025</a>
+		</div>
+	</footer>
+
+	<script src="https://www.gstatic.com/firebasejs/8.1.2/firebase-app.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/8.1.2/firebase-auth.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/8.1.2/firebase-firestore.js"></script>
+	<script src="js/main.js"></script>
+
+	<script>
+		createYear(2025);
+	</script>
+</body>
+
+</html>
